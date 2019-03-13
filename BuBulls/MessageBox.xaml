@@ -1,0 +1,35 @@
+﻿<Window x:Class="BuBulls.MessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuBulls"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        Height="600" Width="1400"
+        mc:Ignorable="d"
+        Title="Ecole Charles Bulls - Erreur" >
+    <Grid>
+      <StackPanel>        
+        <Label Content="Erreur" FontWeight="Black" FontSize="18"/>
+        <Label Content="Il faut corriger les problèmes suivants dans l'Excell, et ensuite dropper à nouveau le document."/>
+
+        <ListView Margin="10" Name="lvErrors">
+          <ListView.View>
+            <GridView>
+              <GridViewColumn Header="Ligne" Width="auto" DisplayMemberBinding="{Binding RowIndex}" />
+              <GridViewColumn Header="Colonne" Width="auto" DisplayMemberBinding="{Binding ColumnName}" />
+              <GridViewColumn Header="Elève" Width="auto"  DisplayMemberBinding="{Binding Eleve}"/>
+              <GridViewColumn Header="Compétence" Width="auto"  DisplayMemberBinding="{Binding Compétence}"/>
+              <GridViewColumn Header="Message" Width="auto"  DisplayMemberBinding="{Binding Message}"/>                
+            </GridView>
+          </ListView.View>
+        </ListView>
+
+        <Button Height="50" Width="100"  Name="btn_close" Click="btn_onClose">
+          Ok
+        </Button>
+     </StackPanel>
+
+        
+    </Grid>
+</Window>

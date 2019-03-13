@@ -1,0 +1,93 @@
+﻿<Window x:Class="BuBulls.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuBulls"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        Height="600" Width="700"
+        mc:Ignorable="d"
+        Title="Ecole Charles Bulls - Générateur de bulletin" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.3*" />
+        </Grid.RowDefinitions>
+        
+        
+        <Grid Grid.Row="0" Grid.Column="0"  Name="zone_basetemplate" AllowDrop="True" Drop="zone_basetemplate_Drop">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE9AEAE" Offset="0"/>
+                    <GradientStop Color="#FFEC5C5C" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel>
+                <Label Content="{Binding Path=BaseTemplateCaption, UpdateSourceTrigger=PropertyChanged}" FontWeight="Black" FontSize="18"/>
+                <TextBlock Text="{Binding Path=BaseTemplateHelp, UpdateSourceTrigger=PropertyChanged}" FontStyle="Italic"  TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Name="zone_excel" AllowDrop="True" Drop="zone_excel_Drop" Visibility="{Binding ExcelVisible, UpdateSourceTrigger=PropertyChanged}">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAEE9C5" Offset="0"/>
+                    <GradientStop Color="#FF1AA5F5" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <fa:ImageAwesome Icon="Refresh" Spin="True" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding ExcelLoadingVisible, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <StackPanel>
+                <Label Content="{Binding Path=ExcelCaption, UpdateSourceTrigger=PropertyChanged}" FontWeight="Black" FontSize="18"/>
+                <TextBlock Text="{Binding Path=ExcelHelp, UpdateSourceTrigger=PropertyChanged}" FontStyle="Italic"  TextWrapping="Wrap" PreviewMouseDown="btn_ExcelCaption"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="zone_template" AllowDrop="False" Visibility="{Binding TemplateVisible, UpdateSourceTrigger=PropertyChanged}" >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE9AEAE" Offset="0"/>
+                    <GradientStop Color="#FFC05CEC" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <StackPanel>
+                <Label Content="{Binding Path=TemplateCaption, UpdateSourceTrigger=PropertyChanged}" FontWeight="Black" FontSize="18"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=TemplateHelp, UpdateSourceTrigger=PropertyChanged}" FontStyle="Italic"  TextWrapping="Wrap"/>
+                    <Button  Name="OpenTemplate" Click="OpenTemplate_Click" Visibility="{Binding EditTemplateButtonVisible, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,0" Background="#FFAAE95F">Editer</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Visibility="{Binding GenerateVisible, UpdateSourceTrigger=PropertyChanged}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAEE9C5" Offset="0"/>
+                    <GradientStop Color="#FF48C500" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            
+            
+            <Grid Grid.Column="0" Grid.ColumnSpan="2">
+            </Grid>
+
+            <fa:ImageAwesome Icon="Refresh" Spin="True" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding GeneratingVisible, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <StackPanel>
+                <Label Content="{Binding Path=GenerateCaption, UpdateSourceTrigger=PropertyChanged}" FontWeight="Black" FontSize="18"/>
+                <TextBlock Text="{Binding Path=GenerateHelp, UpdateSourceTrigger=PropertyChanged}" FontStyle="Italic"  TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <Button Grid.Column="1" Height="50" Background="#FFFFAA00" Name="btn_generate" Click="btn_generate_Click" Visibility="{Binding GenerateButtonVisible, UpdateSourceTrigger=PropertyChanged}">
+                            Générer!
+            </Button>
+        </Grid>
+        
+    </Grid>
+</Window>
